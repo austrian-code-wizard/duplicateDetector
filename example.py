@@ -49,8 +49,7 @@ def run_filter_cluster(excel_sheet_path):
 
 def plot_cosine_de(excel_sheet_path):
     holder = PairHolder.get_holder_from_excel(excel_sheet_path)
-    holder.plot_cosine(0.5, ["NAME1", "STRAS"], "NAME1", data_limit=10000)
-
+    holder.plot_cosine(0.8, ["NAME1", "STRAS"], "NAME1", filter_field="LAND1", filter_value="DE")
 
 
 if __name__ == "__main__":
@@ -60,8 +59,8 @@ if __name__ == "__main__":
     # run_same_countries("/Users/Moritz/Downloads/Customers.xlsx", "/Users/Moritz/Desktop/customer_results_06.csv", 0.6)
     # run_same_countries("/Users/Moritz/Downloads/Customers.xlsx", "/Users/Moritz/Desktop/customer_results_09.csv", 0.9)
     # run_all_countries("/Users/Moritz/Downloads/Customers.xlsx", "/Users/Moritz/Desktop/customer_results.csv")
-    #run_cluster("/Users/Moritz/Documents/Customers_DE.xlsx")
-    #run_filter_cluster(sheet_path)
+    # run_cluster("/Users/Moritz/Documents/Customers_DE.xlsx")
+    # run_filter_cluster(sheet_path)
     plot_cosine_de(sheet_path)
 
 
