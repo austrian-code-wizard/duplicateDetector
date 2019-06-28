@@ -33,7 +33,7 @@ function mouseout(d) {
                 .style("top", "0px");
 
             d3.select("#id")
-                .text("Dar es Salaam");
+                .text("Lorem Ipsum");
             d3.select("#tooltip").classed("hidden", true);
         };
 

@@ -33,23 +33,22 @@ def run_all_countries(excel_sheet_path, result_path):
     holder.save_to_csv(result, result_path)
 
 
-def run_cluster(excel_sheet_path):
+def cluster_cosine(excel_sheet_path):
     holder = PairHolder.get_holder_from_excel(excel_sheet_path)
-    result = holder.run_cluster(0.8, ["NAME1", "STRAS"], "NAME1", data_limit=None,
-                                min_cluster_size=3)
-    print(len(result))
+    result = holder.cluster_cosine(0.8, ["NAME1", "STRAS", "ORT01"], "NAME1", filter_field="LAND1", filter_value="DE")
+    print(result)
 
 
 def run_filter_cluster(excel_sheet_path):
     holder = PairHolder.get_holder_from_excel(excel_sheet_path)
     result = holder.run_cluster(0.8, ["NAME1", "STRAS"], "NAME1", data_limit=None,
                                 min_cluster_size=3, filter_field="LAND1", filter_value="DE", plot=True)
-    print(len(result))
+    print(result)
 
 
 def plot_cosine_de(excel_sheet_path):
     holder = PairHolder.get_holder_from_excel(excel_sheet_path)
-    holder.plot_cosine(0.8, ["NAME1", "STRAS"], "NAME1", filter_field="LAND1", filter_value="DE")
+    holder.plot_cosine(0.8, ["NAME1", "STRAS", "ORT01"], "NAME1", filter_field="LAND1", filter_value="DE")
 
 
 if __name__ == "__main__":
@@ -61,6 +60,8 @@ if __name__ == "__main__":
     # run_all_countries("/Users/Moritz/Downloads/Customers.xlsx", "/Users/Moritz/Desktop/customer_results.csv")
     # run_cluster("/Users/Moritz/Documents/Customers_DE.xlsx")
     # run_filter_cluster(sheet_path)
+    # cluster_cosine(sheet_path)
     plot_cosine_de(sheet_path)
+
 
 

@@ -121,7 +121,7 @@ class PairHolder:
 
 	def _jaro_winkler_step(self, value_1: str, value_2: str, label_1, label_2, max_score: int) -> bool:
 		index = 0
-		index += 1-distance.get_jaro_distance(value_1, value_2)
+		index += distance.get_jaro_distance(value_1, value_2)
 		if index <= max_score:
 			self._pairs["left_side"].append(label_1)
 			self._pairs["right_side"].append(label_2)
@@ -133,6 +133,7 @@ class PairHolder:
 	def _run(self, max_score: int, keys: list, label_field, step_method, data_limit=None, filter_field=None,
 			 filter_value=None):
 		self._runs = 0
+		self._pairs = {"left_side": [], "right_side": [], "similarity": []}
 		data, labels = get_data_and_labels(self._data, keys, label_field, data_limit=data_limit, filter_field=filter_field,
 												 filter_value=filter_value)
 		if len(data) == 0:
@@ -155,9 +156,9 @@ class PairHolder:
 		return pd.DataFrame(result).sort_values(['similarity'], ascending=True)
 
 	@measure
-	def run_jaro_winkler(self, max_score: float, keys: list, label_field, data_limit=None, filter_field=None,
+	def run_jaro_winkler(self, min_score: float, keys: list, label_field, data_limit=None, filter_field=None,
 						 filter_value=None) -> pd.DataFrame:
-		result = self._run(max_score, keys, label_field, self._jaro_winkler_step, data_limit=data_limit,
+		result = self._run(min_score, keys, label_field, self._jaro_winkler_step, data_limit=data_limit,
 						   filter_field=filter_field, filter_value=filter_value)
 		return pd.DataFrame(result).sort_values(['similarity'], ascending=False)
 
